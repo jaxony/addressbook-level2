@@ -19,17 +19,23 @@ public class SortCommand extends Command {
             + ": Displays all persons in the address book as a sorted list using alphabetical (case-insensitive) order of names.\n"
             + "Example: " + COMMAND_WORD;
 
-
-    @Override
-    public CommandResult execute() {
-        List<ReadOnlyPerson> allPersons = addressBook.getAllPersons().immutableListView();
-        List<ReadOnlyPerson> mutableAllPersons = new ArrayList<>(allPersons);
-        Collections.sort(mutableAllPersons, new Comparator<ReadOnlyPerson>() {
+    private static List<ReadOnlyPerson> sortPersonsByName(List<ReadOnlyPerson> immutablePersons) {
+        List<ReadOnlyPerson> mutablePersons = new ArrayList<>(immutablePersons);
+        Collections.sort(mutablePersons, new Comparator<ReadOnlyPerson>() {
             @Override
             public int compare(ReadOnlyPerson o1, ReadOnlyPerson o2) {
                 return o1.getName().fullName.toLowerCase().compareTo(o2.getName().fullName.toLowerCase());
             }
         });
-        return new CommandResult(getMessageForPersonListShownSummary(mutableAllPersons), mutableAllPersons);
+
+        return mutablePersons;
+    }
+
+
+    @Override
+    public CommandResult execute() {
+        List<ReadOnlyPerson> allPersons = addressBook.getAllPersons().immutableListView();
+        List<ReadOnlyPerson> sortedAllPersons = sortPersonsByName(allPersons);
+        return new CommandResult(getMessageForPersonListShownSummary(sortedAllPersons), sortedAllPersons);
     }
 }
