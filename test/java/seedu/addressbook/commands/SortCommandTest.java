@@ -22,13 +22,11 @@ public class SortCommandTest {
     @Before
     public void setUp() throws Exception {
         tagMathematician = new Tag("mathematician");
-
         aliceBetsy     = new Person(new Name("Alice Betsy"),
                 new Phone("91235468", false),
                 new Email("alice@nushackers.org", false),
                 new Address("8 Computing Drive, Singapore", false),
                 new UniqueTagList(tagMathematician));
-
         bobChaplin     = new Person(new Name("Bob Chaplin"),
                 new Phone("94321500", false),
                 new Email("bob@nusgreyhats.org", false),
