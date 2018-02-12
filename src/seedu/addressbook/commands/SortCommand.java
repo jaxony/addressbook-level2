@@ -19,6 +19,12 @@ public class SortCommand extends Command {
             + ": Displays all persons in the address book as a sorted list using alphabetical (case-insensitive) order of names.\n"
             + "Example: " + COMMAND_WORD;
 
+    /**
+     * Returns a list of persons in sorted alphabetical order according to person names.
+     *
+     * @param immutablePersons list of persons in address book in original order
+     * @return list
+     */
     private static List<ReadOnlyPerson> sortPersonsByName(List<ReadOnlyPerson> immutablePersons) {
         List<ReadOnlyPerson> mutablePersons = new ArrayList<>(immutablePersons);
         Collections.sort(mutablePersons, new Comparator<ReadOnlyPerson>() {
